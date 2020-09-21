@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petshop2020.Core", "Petshop2020.Core\Petshop2020.Core.csproj", "{2B6C55C9-4689-4A43-A7A0-4764884976C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petshop2020.Core.Entity", "Petshop2020.Core.Entity\Petshop2020.Core.Entity.csproj", "{CAD43BF2-6217-4054-B154-345E41C89C5C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petshop2020.Infrastructure.Data", "Petshop2020.Infrastructure.Data\Petshop2020.Infrastructure.Data.csproj", "{8A1B259C-4677-4EE5-BA89-B376041B5AA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{461103EF-0268-4E6C-B9A4-DBDB6F65DF4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{503889B1-7C87-489E-9A77-160A2076A5C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A30404E4-BAA2-4948-A469-1F9A4FDB7ECA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petshop2020.WebApi", "Petshop2020.WebApi\Petshop2020.WebApi.csproj", "{CA354F7B-7963-4013-8D70-467E0EFE62F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petshop2020.Core.Filter", "Petshop2020.Core.Filter\Petshop2020.Core.Filter.csproj", "{E81BAC47-D583-46EA-8794-958A118F6C31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B6C55C9-4689-4A43-A7A0-4764884976C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6C55C9-4689-4A43-A7A0-4764884976C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6C55C9-4689-4A43-A7A0-4764884976C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6C55C9-4689-4A43-A7A0-4764884976C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD43BF2-6217-4054-B154-345E41C89C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD43BF2-6217-4054-B154-345E41C89C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD43BF2-6217-4054-B154-345E41C89C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD43BF2-6217-4054-B154-345E41C89C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1B259C-4677-4EE5-BA89-B376041B5AA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1B259C-4677-4EE5-BA89-B376041B5AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1B259C-4677-4EE5-BA89-B376041B5AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1B259C-4677-4EE5-BA89-B376041B5AA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA354F7B-7963-4013-8D70-467E0EFE62F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA354F7B-7963-4013-8D70-467E0EFE62F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA354F7B-7963-4013-8D70-467E0EFE62F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA354F7B-7963-4013-8D70-467E0EFE62F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E81BAC47-D583-46EA-8794-958A118F6C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81BAC47-D583-46EA-8794-958A118F6C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81BAC47-D583-46EA-8794-958A118F6C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81BAC47-D583-46EA-8794-958A118F6C31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B6C55C9-4689-4A43-A7A0-4764884976C5} = {503889B1-7C87-489E-9A77-160A2076A5C0}
+		{CAD43BF2-6217-4054-B154-345E41C89C5C} = {503889B1-7C87-489E-9A77-160A2076A5C0}
+		{8A1B259C-4677-4EE5-BA89-B376041B5AA0} = {461103EF-0268-4E6C-B9A4-DBDB6F65DF4E}
+		{CA354F7B-7963-4013-8D70-467E0EFE62F1} = {A30404E4-BAA2-4948-A469-1F9A4FDB7ECA}
+		{E81BAC47-D583-46EA-8794-958A118F6C31} = {503889B1-7C87-489E-9A77-160A2076A5C0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EC96D41-2218-4ED1-BEE6-25998AE3088E}
+	EndGlobalSection
+EndGlobal
