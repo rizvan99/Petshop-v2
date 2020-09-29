@@ -8,19 +8,24 @@ namespace Petshop2020.Core.Application_Service
 {
     public interface IOwnerService
     {
+        // C - CREATE
         public Owner NewOwner(Owner owner);
-
         public Owner CreateOwner(Owner owner);
 
+        // R - READ
         public FilteredList<Owner> GetAllOwners(FilterSearch filter);
+        public Owner FindOwnerById(int id);
+        public Owner FindOwnerByIdIncludePets(int id);
 
+
+        // U - UPDATE
         public Owner UpdateOwner(Owner ownerToUpdate);
 
+
+        // D - DELETE
         public Owner DeleteOwner(int id);
 
-        public Owner FindOwnerById(int id);
-
-        public Owner FindOwnerByIdIncludePets(int id);
+        
 
 
     }

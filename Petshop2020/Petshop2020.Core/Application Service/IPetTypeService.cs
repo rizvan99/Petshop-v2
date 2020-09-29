@@ -12,15 +12,15 @@ namespace Petshop2020.Core.Application_Service
         public PetType NewType(PetType petType);
         public PetType CreateType(PetType petType);
 
+
         //READ
         public FilteredList<PetType> GetAllTypes(FilterSearch filter);
-
         public PetType FindTypeById(int id);
-
         public PetType FindTypeByIdIncludePets(int id);
 
         //UPDATE
         public PetType UpdateType(PetType typeToUpdate);
+
 
         //DELETE
         public PetType DeleteType(int id);

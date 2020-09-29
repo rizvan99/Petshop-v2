@@ -38,19 +38,7 @@ namespace Petshop2020.Core.Application_Service.Service
 
         public PetType FindTypeByIdIncludePets(int id)
         {
-            var type = _typeRepo.CloneById(id);
-
-            if (type != null)
-            {
-                type.Pets = _petRepo.AllPetsFromList().Where(pet => pet.Type.Id == type.Id).ToList();
-            }
-            else
-            {
-                return _typeRepo.ReadTypeById(id);
-            }
-            
-
-            return type;
+            return _typeRepo.ReadTypeByIdIncludePets(id);
         }
 
         public FilteredList<PetType> GetAllTypes(FilterSearch filter)

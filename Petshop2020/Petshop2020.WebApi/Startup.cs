@@ -6,15 +6,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Writers;
+using Newtonsoft.Json;
 using Petshop2020.Core.Application_Service;
 using Petshop2020.Core.Application_Service.Service;
 using Petshop2020.Core.Domain_Service;
-using Petshop2020.Infrastructure.Data;
-using Petshop2020.Infrastructure.Data.Repository;
+using Petshop2020.Infrastructure.SQLite.Data;
+using Petshop2020.Infrastructure.SQLite.Data.Repositories;
 
 namespace Petshop2020.WebApi
 {
@@ -30,6 +33,21 @@ namespace Petshop2020.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //This is used for in memory
+            /*
+            services.AddDbContext<PetshopContext>
+                (
+                    opt => opt.UseInMemoryDatabase("TheDB")
+                );
+            */
+
+            services.AddDbContext<PetshopContext>
+                (
+                    opt => opt.UseSqlite("Data Source=petshop.db")
+                );
+
+
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
@@ -41,6 +59,18 @@ namespace Petshop2020.WebApi
 
             });
 
+            services.AddCors(options =>
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    })
+                );
+
+            services.AddControllers().AddNewtonsoftJson
+                (x => x.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
@@ -48,6 +78,9 @@ namespace Petshop2020.WebApi
             services.AddScoped<IPetTypeRepository, PetTypeRepository>();
             services.AddScoped<IPetTypeService, PetTypeService>();
             services.AddControllers();
+
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +90,16 @@ namespace Petshop2020.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetshopContext>();
+                    DBInitializer.SeedDB(ctx);
+                }
             }
 
+
+
+            /* Initialize data for old fake db / static data
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var repo = scope.ServiceProvider.GetService<IPetRepository>();
@@ -66,6 +107,7 @@ namespace Petshop2020.WebApi
                 var type = scope.ServiceProvider.GetService<IPetTypeRepository>();
                 new DataInitializer(repo, repoOwner, type).InitData();
             }
+            */
 
 
             app.UseHttpsRedirection();
@@ -80,6 +122,8 @@ namespace Petshop2020.WebApi
             });
 
             app.UseSwagger();
+
+            app.UseCors();
 
             app.UseSwaggerUI(options =>
             {

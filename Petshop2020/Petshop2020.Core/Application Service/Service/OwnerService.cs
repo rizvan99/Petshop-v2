@@ -38,18 +38,7 @@ namespace Petshop2020.Core.Application_Service.Service
 
         public Owner FindOwnerByIdIncludePets(int id)
         {
-            var owner = _ownerRepo.CloneById(id);
-           
-            if (owner != null)
-            {
-                owner.Pets = _petRepo.AllPetsFromList().Where(pet => pet.Owner.Id == owner.Id).ToList();
-            }
-            else
-            {
-                return _ownerRepo.ReadById(id);
-            }
-
-            return owner;
+            return _ownerRepo.ReadByIdIncludePets(id);
         }
 
         public FilteredList<Owner> GetAllOwners(FilterSearch filter)
