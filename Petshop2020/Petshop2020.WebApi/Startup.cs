@@ -43,7 +43,7 @@ namespace Petshop2020.WebApi
 
             services.AddDbContext<PetshopContext>
                 (
-                    opt => opt.UseSqlite("Data Source=petshop.db")
+                    opt => opt.UseSqlite("Data Source=petshop.db").EnableSensitiveDataLogging()
                 );
 
 
