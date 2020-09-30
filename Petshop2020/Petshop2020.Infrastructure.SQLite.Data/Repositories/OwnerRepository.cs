@@ -40,7 +40,14 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
 
         public Owner DeleteOwner(int id)
         {
-            throw new NotImplementedException();
+            var ownerDeleted = _ctx.Owners.FirstOrDefault(o => o.Id == id);
+            if (ownerDeleted != null)
+            {
+                _ctx.Remove(ownerDeleted);
+                _ctx.SaveChanges();
+            }
+            
+            return ownerDeleted;
         }
 
         public IEnumerable<Owner> GetAllOwners()
