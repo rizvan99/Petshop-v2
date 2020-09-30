@@ -93,7 +93,7 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
         public Owner ReadById(int id)
         {
             return _ctx.Owners
-                .AsNoTracking() 
+                .AsNoTracking()
                 .FirstOrDefault(o => o.Id == id);
         }
 

@@ -16,6 +16,7 @@ namespace Petshop2020.Core.Domain_Service
         public FilteredList<Pet> ReadAllPets(FilterSearch filter);
         public IEnumerable<Pet> AllPetsFromList();
         public Pet ReadById(int id);
+        public Pet ReadByIdIncludeOwnersAndTypes(int id);
 
 
         // U - UPDATE

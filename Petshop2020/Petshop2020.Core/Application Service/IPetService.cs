@@ -16,6 +16,7 @@ namespace Petshop2020.Core.Application_Service
         //R - Read all pets
         public FilteredList<Pet> GetAllPets(FilterSearch filter);
         public Pet FindPetById(int id);
+        public Pet FindPetByIdIncludeOwnersAndTypes(int id);
 
 
         //U - Update pet

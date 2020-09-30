@@ -76,6 +76,15 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
             return _ctx.Pets.FirstOrDefault(p => p.Id == id);
         }
 
+        public Pet ReadByIdIncludeOwnersAndTypes(int id)
+        {
+            return _ctx.Pets
+                .AsNoTracking()
+                .Include(p => p.Owner)
+                .Include(p => p.Type)
+                .FirstOrDefault(p => p.Id == id);
+        }
+
         public Pet UpdatePet(Pet petToUpdate)
         {
             throw new NotImplementedException();

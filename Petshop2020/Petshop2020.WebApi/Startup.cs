@@ -43,9 +43,9 @@ namespace Petshop2020.WebApi
 
             services.AddDbContext<PetshopContext>
                 (
-                    opt => opt.UseSqlite("Data Source=petshop.db").EnableSensitiveDataLogging()
+                    opt => opt.UseSqlite("Data Source=petshop.db").EnableSensitiveDataLogging(), ServiceLifetime.Transient
                 );
-
+            
 
 
             services.AddSwaggerGen(options =>
@@ -96,8 +96,6 @@ namespace Petshop2020.WebApi
                     DBInitializer.SeedDB(ctx);
                 }
             }
-
-
 
             /* Initialize data for old fake db / static data
             using (var scope = app.ApplicationServices.CreateScope())

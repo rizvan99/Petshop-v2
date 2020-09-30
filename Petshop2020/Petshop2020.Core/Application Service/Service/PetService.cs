@@ -119,5 +119,10 @@ namespace Petshop2020.Core.Application_Service.Service
             return query.ToList();*/
             return null;
         }
+
+        public Pet FindPetByIdIncludeOwnersAndTypes(int id)
+        {
+            return _petRepo.ReadByIdIncludeOwnersAndTypes(id);
+        }
     }
 }

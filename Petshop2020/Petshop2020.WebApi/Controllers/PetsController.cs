@@ -33,7 +33,7 @@ namespace Petshop2020.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
-            var pet = _petService.FindPetById(id);
+            var pet = _petService.FindPetByIdIncludeOwnersAndTypes(id);
 
             if (id <= 0)
             {
