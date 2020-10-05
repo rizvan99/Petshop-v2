@@ -18,6 +18,14 @@ namespace Petshop2020.Infrastructure.SQLite.Data
             
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Pet>()
+                .HasOne(o => o.Owner)
+                .WithMany(p => p.Pets)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
+
         public DbSet<Pet> Pets { get; set; }
 
         public DbSet<PetType> PetTypes { get; set; }

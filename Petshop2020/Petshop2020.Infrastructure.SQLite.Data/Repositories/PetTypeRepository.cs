@@ -36,6 +36,11 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
             return newType.Entity;
         }
 
+        public PetType UpdatePetType(PetType typeToUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
         public PetType DeletePetType(int id)
         {
             throw new NotImplementedException();
@@ -91,9 +96,5 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
                 .FirstOrDefault(t => t.Id == id);
         }
 
-        public PetType UpdatePetType(PetType typeToUpdate)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

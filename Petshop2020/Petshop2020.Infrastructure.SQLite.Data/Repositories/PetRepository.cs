@@ -34,6 +34,13 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
             return newPet.Entity;*/
         }
 
+        public Pet UpdatePet(Pet petToUpdate)
+        {
+            var updated = _ctx.Update(petToUpdate).Entity;
+            _ctx.SaveChanges();
+            return updated;
+        }
+
         public Pet DeletePet(int id)
         {
             throw new NotImplementedException();
@@ -85,9 +92,5 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
                 .FirstOrDefault(p => p.Id == id);
         }
 
-        public Pet UpdatePet(Pet petToUpdate)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

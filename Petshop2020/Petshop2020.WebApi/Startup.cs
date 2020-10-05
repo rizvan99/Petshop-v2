@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Writers;
 using Newtonsoft.Json;
 using Petshop2020.Core.Application_Service;
@@ -41,13 +43,34 @@ namespace Petshop2020.WebApi
                 );
             */
 
+            //----- DATABASE -----
             services.AddDbContext<PetshopContext>
                 (
                     opt => opt.UseSqlite("Data Source=petshop.db").EnableSensitiveDataLogging(), ServiceLifetime.Transient
                 );
-            
+
+            //----- AUTHENTICATION -----
+            Byte[] secretBytes = new byte[40];
+            Random rand = new Random();
+            rand.NextBytes(secretBytes);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    //ValidAudience = "TodoApiClient",
+                    ValidateIssuer = false,
+                    //ValidIssuer = "TodoApi",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
+                    ValidateLifetime = true, //validate the expiration and not before values in the token
+                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                };
+            });
 
 
+            //----- SWAGGER -----
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
@@ -59,6 +82,7 @@ namespace Petshop2020.WebApi
 
             });
 
+            //----- SECURITY -----
             services.AddCors(options =>
                 options.AddDefaultPolicy(
                     builder =>
@@ -67,9 +91,12 @@ namespace Petshop2020.WebApi
                     })
                 );
 
+
+            // Avoiding reference loops
             services.AddControllers().AddNewtonsoftJson
                 (x => x.SerializerSettings.ReferenceLoopHandling = 
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
@@ -113,6 +140,8 @@ namespace Petshop2020.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

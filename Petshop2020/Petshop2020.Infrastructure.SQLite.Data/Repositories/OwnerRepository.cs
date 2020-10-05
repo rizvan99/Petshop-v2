@@ -38,6 +38,11 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
             return newOwner.Entity;
         }
 
+        public Owner UpdateOwner(Owner ownerToUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
         public Owner DeleteOwner(int id)
         {
             var ownerDeleted = _ctx.Owners.FirstOrDefault(o => o.Id == id);
@@ -105,9 +110,5 @@ namespace Petshop2020.Infrastructure.SQLite.Data.Repositories
                 .FirstOrDefault(o => o.Id == id);
         }
 
-        public Owner UpdateOwner(Owner ownerToUpdate)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

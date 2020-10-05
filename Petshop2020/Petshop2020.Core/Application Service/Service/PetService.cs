@@ -64,16 +64,8 @@ namespace Petshop2020.Core.Application_Service.Service
         }
 
         public Pet UpdatePet(Pet petToUpdate)
-        {   
-            var pet = FindPetById(petToUpdate.Id);
-            pet.Name = petToUpdate.Name;
-            pet.BirthDate = petToUpdate.BirthDate;
-            pet.Color = petToUpdate.Color;
-            pet.Price = petToUpdate.Price;
-            pet.PreviousOwner = petToUpdate.PreviousOwner;
-            pet.SoldDate = petToUpdate.SoldDate;
-            pet.Type = petToUpdate.Type;
-            return pet;
+        {
+            return _petRepo.UpdatePet(petToUpdate);
             
         }
 
