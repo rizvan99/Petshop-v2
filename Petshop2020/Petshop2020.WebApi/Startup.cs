@@ -83,13 +83,7 @@ namespace Petshop2020.WebApi
             });
 
             //----- SECURITY -----
-            services.AddCors(options =>
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                    })
-                );
+            services.AddCors();
 
 
             // Avoiding reference loops
@@ -134,6 +128,13 @@ namespace Petshop2020.WebApi
             }
             */
 
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
             app.UseHttpsRedirection();
 
@@ -149,8 +150,6 @@ namespace Petshop2020.WebApi
             });
 
             app.UseSwagger();
-
-            app.UseCors();
 
             app.UseSwaggerUI(options =>
             {
