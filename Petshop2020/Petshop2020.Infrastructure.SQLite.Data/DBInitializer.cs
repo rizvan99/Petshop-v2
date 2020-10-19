@@ -1,16 +1,55 @@
 ﻿using Petshop2020.Core.Entity;
+using Petshop2020.Infrastructure.SQLite.Data.Helpers;
+using Petshop2020.Infrastructure.SQLite.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Petshop2020.Infrastructure.SQLite.Data
 {
     public class DBInitializer
     {
-        public static void SeedDB(PetshopContext ctx)
+        private IAuthenticationHelper _autHelper;
+
+        public DBInitializer(IAuthenticationHelper helper)
+        {
+            _autHelper = helper;
+        }
+
+        public void SeedDB(PetshopContext ctx)
         {
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
+
+            //Creating users with hashing and salting
+            string password = "hello123";
+            byte[] passwordHashJim, passwordSaltJim, passwordHashJoe, passwordSaltJoe;
+
+            _autHelper.CreatePasswordHash(password, out passwordHashJim, out passwordSaltJim);
+            _autHelper.CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
+
+            List<User> users = new List<User>
+            {
+                new User
+                {
+                    Username = "Jimmy",
+                    PasswordHash = passwordHashJoe,
+                    PasswordSalt = passwordSaltJoe,
+                    IsAdmin = false
+                },
+
+                new User
+                {
+                    Username = "Joey",
+                    PasswordHash = passwordHashJoe,
+                    PasswordSalt = passwordSaltJoe,
+                    IsAdmin = true
+                }
+            };
+            ctx.AddRange(users);
+
+
 
             var owner1 = new Owner()
             {

@@ -32,5 +32,7 @@ namespace Petshop2020.Infrastructure.SQLite.Data
 
         public DbSet<Owner> Owners { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
     }
 }
